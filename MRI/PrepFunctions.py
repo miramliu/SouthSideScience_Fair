@@ -1,6 +1,125 @@
 # PrepCode
-# This contains functions used in PrepCode for the demonstrations.
+# This contains functions used in Scratch and RunMe for the demonstrations.
 
+import numpy as np
+import matplotlib
+import matplotlib.pyplot as pl
+import csv
+import scipy.optimize as op
+import scipy.stats
+from scipy.optimize import curve_fit
+import scipy.io
+from scipy.stats import rice
+
+import random
+import pickle
+import seaborn as sns
+
+import numpy as np
+from scipy.stats import ttest_ind, ttest_ind_from_stats, wilcoxon,ttest_rel, pearsonr
+from scipy.special import stdtr
+import csv
+import pandas as pd
+
+import sys 
+import os
+
+import tkinter as tk
+from tkinter import ttk
+
+    
+
+
+# code used in RunMe
+def ShowThreeWaves(x,wave1,wave2,wave3):
+    fig, (ax1,ax2,ax3,ax4) = pl.subplots(4,1)
+    ax1.plot(x,wave1,color = 'red')
+    ax1.set_title('Middle C')
+    ax1.set_ylabel('261 Hz')
+
+    ax2.plot(x,wave2,color = 'purple')
+    ax2.set_title('Middle E')
+    ax2.set_ylabel('330 Hz')
+
+    ax3.plot(x,wave3,color = 'green')
+    ax3.set_title('Middle G')
+    ax3.set_ylabel('392 Hz')
+
+    ax4.plot(x,wave1+wave2+wave3)
+    ax4.set_title('C Chord')
+    ax4.set_xlabel('time (s)')
+    #ax4.set_title('261 Hz + 330 Hz + 392 Hz')
+    fig.tight_layout()
+    pl.show()
+    return
+
+def ShowFTOfWaves(x,ft_freq,wave1,wave2,wave3,ft_sin1,ft_sin2,ft_sin3,wavesum,ft_sinsum):
+
+    # Set up subplots
+    fig, ((ax1, ax2),(ax3,ax4),(ax5,ax6),(ax7,ax8)) = pl.subplots(4,2)
+
+    # plot wave 1 with 5 cycles per second
+    ax1.plot(x,wave1, color = 'red')
+    ax1.set_title('261 Hz (Middle C)')
+    ax2.plot(ft_freq,abs(ft_sin1),color = 'red')
+    ax8.vlines(x=261,ymin =0,ymax=5000,color = 'red',label = 'C')
+    ax2.set_title('FT of 261 Hz')
+    ax2.set_xlim([0,500])
+
+    # plot wave 2 with 329
+    ax3.plot(x,wave2,color = 'purple')
+    ax3.set_title('329 Hz (E)')
+    ax4.plot(ft_freq,abs(ft_sin2),color = 'purple')
+    ax4.set_title('FT of 329 Hz')
+    ax8.vlines(x=320,ymin =0,ymax=4000,color = 'purple',label = 'E')
+    ax4.set_xlim([0,500])
+
+    # plot wave 3 with 392 
+    ax5.plot(x,wave3,color = 'green')
+    ax5.set_title('392 Hz (G)')
+    ax6.plot(ft_freq,abs(ft_sin3),color = 'green')
+    ax6.set_title('FT of 392 Hz')
+    ax8.vlines(x=400,ymin =0,ymax=4000,color = 'green',label = 'G')
+    ax6.set_xlim([0,500])
+
+    # plot of Chord
+    ax7.plot(x,wavesum)
+    ax7.set_title('C Chord')
+    ax8.plot(ft_freq,abs(ft_sinsum))
+    ax8.set_title('FT of C Chord')
+    ax8.set_xlim([0,500])
+    ax8.legend(prop={'size': 6})
+
+
+    fig.tight_layout()
+    return
+
+
+def ShowFTof2Dwaves(x,ft_freq,img,kspace):
+    fig, ((ax1, ax2),(ax3,ax4)) = pl.subplots(2,2)
+
+    ax1.imshow(img,cmap = 'gray',extent = [0,1,0,1])
+    ax1.set_title('2d planar wave')
+    ax2.plot(x,img[51])
+    ax2.set_title('Cross section of 2d planar wave')
+
+    #so this has wavelength of 30
+    # pixel size of 3
+
+    ax3.imshow(np.abs(kspace),cmap = 'gray',extent = [-50,50,-50,50])
+    ax3.set_title('Fourier Transform of 2d planar wave')
+    ax4.plot(ft_freq,np.abs(kspace)[50])
+    ax4.set_title('Cross section of Fourier Transform')
+    fig.tight_layout()
+    pl.show()
+
+
+    return
+
+
+
+
+# Code from previous scratch
 def readimage(filepath):
     ds = dicom.dcmread(filepath)
     img = ds.pixel_array
@@ -12,7 +131,7 @@ def readimage(filepath):
     fov_img = np.shape(img)[0]
     return img, fov_img
 
-def fouriertransform(img)
+def fouriertransform(img):
     ft = np.fft.ifftshift(img)
     ft = np.fft.fft2(ft)
     kspace = np.fft.fftshift(ft) #moves zero frequency component to center
@@ -202,7 +321,7 @@ def watchKspacePlanar(kspace,fov_img,xlim,filename):
         
     return 
 
-def Display_Reconstruction(filename)
+def Display_Reconstruction(filename):
     image_name = '/data/' + filename + '_superposition.pickle'
     masks_name = '/data/' + filename + '_superposition_masks.pickle'
     kspace_name = '/data/' + filename + '_superposition_kspace.pickle'
