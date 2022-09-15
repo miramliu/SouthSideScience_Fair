@@ -1,5 +1,6 @@
 # S3F_Demo
  South Side Science Festival demos 2022 
+ SouthSideScienceFair.pdf for handout.
  
  
 # Within folder MRI:
