@@ -31,3 +31,6 @@ Display the interactive CT reconstruction display with `python3 ct-recon.py`.
 Click on different angles within the CT gantry to show how the output image changes.
 The user must supply the input images in their own data directory (CT/recon_process/) for this to run.
 
+Example of the interactive display:
+
+![Example display](CT/example.png)
