@@ -22,11 +22,12 @@ Distance from center = frequency\
 Angle from horizontal =  tilt \
 Complex portion = phase 
 
+## Scratch
+This took an image of a brain and showed reconstruction of the image through superposition of 2d planar waves of varying frequencies and the corresponding location of those in k-space. The pickle files were saved in a data folder to save computation time and energy. 
+
 
 # Within folder CT:
 Display the interactive CT reconstruction display with `python3 ct-recon.py`. 
 Click on different angles within the CT gantry to show how the output image changes.
 The user must supply the input images in their own data directory (CT/recon_process/) for this to run.
 
-## Scratch
-This took an image of a brain and showed reconstruction of the image through superposition of 2d planar waves of varying frequencies and the corresponding location of those in k-space. The pickle files were saved in a data folder to save computation time and energy. 
