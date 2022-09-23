@@ -32,7 +32,7 @@ from tkinter import ttk
 
 # code used in RunMe
 def ShowThreeWaves(x,wave1,wave2,wave3):
-    fig, (ax1,ax2,ax3,ax4) = pl.subplots(4,1)
+    fig, (ax1,ax2,ax3,ax4) = pl.subplots(4,1,figsize = (7,7))
     ax1.plot(x,wave1,color = 'red')
     ax1.set_title('Middle C')
     ax1.set_ylabel('261 Hz')
@@ -56,7 +56,7 @@ def ShowThreeWaves(x,wave1,wave2,wave3):
 def ShowFTOfWaves(x,ft_freq,wave1,wave2,wave3,ft_sin1,ft_sin2,ft_sin3,wavesum,ft_sinsum):
 
     # Set up subplots
-    fig, ((ax1, ax2),(ax3,ax4),(ax5,ax6),(ax7,ax8)) = pl.subplots(4,2)
+    fig, ((ax1, ax2),(ax3,ax4),(ax5,ax6),(ax7,ax8)) = pl.subplots(4,2,figsize = (7,7))
 
     # plot wave 1 with 5 cycles per second
     ax1.plot(x,wave1, color = 'red')
